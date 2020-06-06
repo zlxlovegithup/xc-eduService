@@ -1,0 +1,25 @@
+server:
+  port: 31450
+spring:
+  application:
+    name: xc-service-manage-media-processor
+  data:
+    mongodb:
+      uri: mongodb://root:123@localhost:27017
+      database: xc_media
+
+  #rabbitmq配置
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: / #连接到rabbitMQ的vhost
+xc-service-manage-media:
+  mq:
+    queue-media-video-processor: queue_media_video_processor
+    routingkey-media-video: routingkey_media_video
+  #视频文件存放的路径
+  video-location: F:/Ffmpeg_Video/video/
+  #配置ffmpeg视频文件格式转换命令路径
+  ffmpeg-path: D:/ffmpeg-20200412-f1894c2-win64-static/bin/ffmpeg.exe
