@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>xc-framework-parent</artifactId>
+        <groupId>com.xuecheng</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../xc-framework-parent/pom.xml</relativePath>
+    </parent>
+    
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.xuecheng</groupId>
+    <artifactId>xc-service-search</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.xuecheng</groupId>
+            <artifactId>xc-framework-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xuecheng</groupId>
+            <artifactId>xc-framework-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xuecheng</groupId>
+            <artifactId>xc-service-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--Java用于操作ElasticSearch的客户端-->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>6.2.1</version>
+        </dependency>
+        <!-- 引入ElasticSearch -->
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>6.2.1</version>
+        </dependency>
+
+        <!-- Fastjson是一个Java语言编写的高性能功能完善的JSON库 被广泛使用在缓存序列化、协议交互、Web输出、Android客户端等多种应用场景
+             常用api:
+                1. 将对象序列化成json字符串  toJSONString(Object object)
+                2. 将json字符串反序列化成对象  parseObject(String text, Class<T> clazz)
+                3. 将json字符串反序列化成JSON对象 parseObject(String text)
+                4.根据key 得到json中的json数组 getJSONArray(String key)
+                5. 根据下标拿到json数组的json对象 getJSONObject(int index)
+                6.  根据key拿到json的字符串值 getString(String key)
+                7. 根据key拿到json的int值 getIntValue(String key)
+                8. 根据key拿到json的boolean值 getBooleanValue(String key)
+        -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <!-- commons-io是一款处理io流的工具，封装了很多处理io流和文件的方法，可以大大简化我们处理io流和操作文件的代码 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <!-- commons-lang3中可以让我们写的代码更加的优雅、提供开发效率，最重要的是我们自己写的工具类有可能出现奇怪的问题
+            1 ArchUtils：系统信息工具类
+            2 BooleanUtils：布尔工具类
+            3 EnumUtils：枚举工具类
+            4 StringUtils：字符串工具类
+            5 NumberUtils：数字操作工具
+            6 RandomStringUtils：随机字符串工具类
+            7 ...
+        -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <!-- 导入Eureka客户端的依赖-->
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+    </dependencies>
+
+
+</project>
