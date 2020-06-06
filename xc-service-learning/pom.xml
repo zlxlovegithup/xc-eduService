@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>xc-framework-parent</artifactId>
+        <groupId>com.xuecheng</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../xc-framework-parent/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>xc-service-learning</artifactId>
+
+    <dependencies>
+        <!--导入Eureka服务的依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!--OkHttp是一个高效的HTTP客户端，它有以下默认特性：
+                支持HTTP/2，允许所有同一个主机地址的请求共享同一个socket连接
+                连接池减少请求延时
+                透明的GZIP压缩减少响应数据的大小
+                缓存响应内容，避免一些完全重复的请求
+            OkHttp可以有以下应用场景:
+                1.1. 异步GET请求
+                1.2. 同步GET请求
+                2.1. POST方式提交String
+                2.2 POST方式提交流
+                2.3. POST提交文件
+                2.4. POST方式提交表单
+                2.5. POST方式提交分块请求
+                ......
+        -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+        <!--feign是声明式的web service客户端，它让微服务之间的调用变得更简单了，类似controller调用service。Spring Cloud集成了Ribbon和Eureka，可在使用Feign时提供负载均衡的http客户端。-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xuecheng</groupId>
+            <artifactId>xc-framework-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xuecheng</groupId>
+            <artifactId>xc-framework-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xuecheng</groupId>
+            <artifactId>xc-framework-utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xuecheng</groupId>
+            <artifactId>xc-service-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--Spring Boot 使用 druid-spring-boot-starter 整合druid-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <!--spring boot 整合 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+        <!--
+        对象关系映射,是一种程序技术,用于实现面向对象编程语言里不同类型系统的数据之间的转换.从效果上说,它其实是创建了一个可在编程语言里使用的 "虚拟对象数据库".
+        ORM的方法论基于三个核心原则:
+            简单:以最基本的形式建模数据
+            传达性:数据库结构被任何人都能理解的语言文档化
+            精确性:基于数据模型创建正确标准化的结构
+        -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!-- Fastjson是一个Java语言编写的高性能功能完善的JSON库 被广泛使用在缓存序列化、协议交互、Web输出、Android客户端等多种应用场景
+             常用api:
+                1. 将对象序列化成json字符串  toJSONString(Object object)
+                2. 将json字符串反序列化成对象  parseObject(String text, Class<T> clazz)
+                3. 将json字符串反序列化成JSON对象 parseObject(String text)
+                4.根据key 得到json中的json数组 getJSONArray(String key)
+                5. 根据下标拿到json数组的json对象 getJSONObject(int index)
+                6.  根据key拿到json的字符串值 getString(String key)
+                7. 根据key拿到json的int值 getIntValue(String key)
+                8. 根据key拿到json的boolean值 getBooleanValue(String key)
+        -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <!-- commons-io是一款处理io流的工具，封装了很多处理io流和文件的方法，可以大大简化我们处理io流和操作文件的代码 -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <!-- commons-lang3中可以让我们写的代码更加的优雅、提供开发效率，最重要的是我们自己写的工具类有可能出现奇怪的问题
+            1 ArchUtils：系统信息工具类
+            2 BooleanUtils：布尔工具类
+            3 EnumUtils：枚举工具类
+            4 StringUtils：字符串工具类
+            5 NumberUtils：数字操作工具
+            6 RandomStringUtils：随机字符串工具类
+            7 ...
+        -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <!--SpringBoot整合rabbitMQ-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
