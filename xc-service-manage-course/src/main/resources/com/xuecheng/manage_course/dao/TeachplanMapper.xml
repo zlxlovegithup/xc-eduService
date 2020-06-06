@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuecheng.manage_course.dao.TeachplanMapper">
+    <!--
+        我们需要将查询的结果以树的形式展现出来,故将表进行左外连接
+            mybatis和数据库进行映射时需要体现层级关系需要collection
+            a表左外连接b表  连接之后的表再左外连接c表
+            左外连接: 以左表为主表，右表没数据为null
+            右外连接: 以右表为主表，左表中没数据的为null
+    -->
+    <select id="selectList" resultMap="teachplanMap" parameterType="java.lang.String">
+        select
+            a.id as one_id,
+            a.pname as one_pname,
+            a.grade as one_grade,
+            a.orderby as one_orderby,
+            b.id as two_id,
+            b.pname as two_pname,
+            b.grade as two_grade,
+            b.orderby as two_orderby,
+            c.id as three_id,
+            c.pname as three_pname,
+            c.grade as three_grade,
+            c.orderby as three_orderby,
+            media.media_id as media_id,
+            media.media_fileoriginalname as media_fileOriginalName
+        from
+            teachplan as a <!--#根节点-->
+        left join
+            teachplan as b <!--#二级节点-->
+        on
+            a.id = b.parentid
+        left join
+            teachplan as c <!--#三级节点-->
+        on
+            b.id = c.parentid
+        left join
+            teachplan_media as media
+        on
+            c.id = media.teachplan_id
+        where
+            a.parentid = '0'
+        <!--如果只有一个参数，那么_parameter(它属于mybatis的内置参数) 就代表该参数，如果有多个参数，那么_parameter 可以get(0)得到第一个参数-->
+        <if test="_parameter!=null and _parameter!=''">
+            and
+            a.courseid = #{courseId}
+        </if>
+        ORDER BY
+            a.orderby,
+            b.orderby,
+            c.orderby;
+    </select>
+
+    <resultMap id="teachplanMap" type="com.xuecheng.framework.domain.course.ext.TeachplanNode">
+        <id property="id" column="one_id"></id>
+        <result property="pname" column="one_pname"></result>
+        <result property="grade" column="one_grade"></result>
+        <collection property="children" ofType="com.xuecheng.framework.domain.course.ext.TeachplanNode">
+            <id property="id" column="two_id"></id>
+            <result property="pname" column="two_pname"></result>
+            <result property="grade" column="two_grade"></result>
+            <collection property="children" ofType="com.xuecheng.framework.domain.course.ext.TeachplanNode">
+                <id property="id" column="three_id"></id>
+                <result property="pname" column="three_pname"></result>
+                <result property="grade" column="three_grade"></result>
+                <result property="mediaId" column="media_id"></result>
+                <result property="mediaFileoriginalname" column="media_fileOriginalName"></result>
+            </collection>
+        </collection>
+    </resultMap>
+</mapper>
