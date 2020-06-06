@@ -1,0 +1,18 @@
+server:
+  port: ${PORT:50101}  #服务端口(服务端口可配置) (你需要在idea中的启动脚本中配置)
+
+spring:
+  application:
+    name: xc-govern-center #指定服务名
+
+eureka:
+  client:
+    registerWithEureka: true #服务注册，是否将自己注册到Eureka服务中(单机环境下设置为false,高可用环境下设置为true)
+    fetchRegistry: true #服务发现，是否从Eureka中获取注册信息(单机环境下设置为false,高可用环境下设置为true)
+    serviceUrl: #Eureka客户端与Eureka服务端的交互地址，高可用状态配置对方的地址，单机状态配置自己（如果 不配置则默认本机8761端口）
+      defaultZone: ${EUREKA_SERVER:http://eureka02:50102/eureka/} #这里需要在自己的C:\Windows\System32\drivers\etc\HOST文件下配置127.0.0.1 eureka01 (你需要在idea中的启动脚本中配置)
+  server:
+    enableSelfPreservation: false #是否开启自我保护模式
+    evictionIntervalTimerInMs: 60000 #服务注册表清理间隔（单位毫秒，默认是60*1000）
+  instance:
+    hostname: ${EUREKA_DOMAIN:eureka01} #hostname的动态配置 (你需要在idea中的启动脚本中配置)
