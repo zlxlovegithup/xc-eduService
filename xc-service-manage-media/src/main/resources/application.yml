@@ -1,0 +1,37 @@
+server:
+  port: 31400
+spring:
+  application:
+    name: xc-service-manage-media
+  data:
+    mongodb:
+      uri: mongodb://root:123@localhost:27017
+      database: xc_media
+xc-service-manage-media:
+  upload-location: F:/Ffmpeg_Video/video/ #上传的视频文件的存储目录
+  mq:
+    queue-media-video-processor: queue_media_video_processor
+    routingkey-media-video: routingkey_media_video
+eureka:
+  client:
+    registerWithEureka: true #服务注册开关
+    fetchRegistry: true #服务发现开关
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:50101/eureka/} #Eureka客户端与Eureka服务端进行交互的地址，多个中间用逗号分隔
+  instance:
+    prefer-ip-address: true #将自己的ip地址注册到Eureka服务中
+    ip-address: ${IP_ADDRESS:127.0.0.1}
+    instance-id: ${spring.application.name}:${server.port} #指定实例id
+  #1>>> Spring Cloud Ribbon是一个基于HTTP和TCP的客户端负载均衡工具，它基于Netflix Ribbon实现。
+  #2>>> 通过Spring Cloud的封装，可以让我们轻松地将面向服务的REST模版请求自动转换成客户端负载均衡的服务调用。
+  #     Spring Cloud Ribbon虽然只是一个工具类框架，它不像服务注册中心、配置中心、API网关那样需要独立部署，
+  #     但是它几乎存在于每一个Spring Cloud构建的微服务和基础设施中。
+  #3>>> 因为微服务间的调用，API网关的请求转发等内容，实际上都是通过Ribbon来实现的，包括后续我们将要介绍的Feign，它也是基于Ribbon实现的工具。
+  #     所以，对Spring Cloud Ribbon的理解和使用，对于我们使用Spring Cloud来构建微服务非常重要。
+ribbon:
+  MaxAutoRetries: 2 #最大重试次数，当Eureka中可以找到服务，但是服务连不上时将会重试，如果eureka中找不到服务则直接走断路器
+  MaxAutoRetriesNextServer: 3 #切换实例的重试次数
+  OkToRetryOnAllOperations: false #对所有操作请求都进行重试，如果是get则可以，如果是post，put等操作没有实现幂等的情况下是很危险的,所以设置为false
+  ConnectTimeout: 500000  #请求连接的超时时间
+  ReadTimeout: 600000  #请求处理的超时时间
+
