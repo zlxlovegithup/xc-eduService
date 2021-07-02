@@ -52,7 +52,7 @@
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
-            <version>6.2.1</version>
+            <version>6.8.15</version>
         </dependency>
 
         <!-- Fastjson是一个Java语言编写的高性能功能完善的JSON库 被广泛使用在缓存序列化、协议交互、Web输出、Android客户端等多种应用场景
